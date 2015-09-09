@@ -109,7 +109,7 @@ sub dump_databases
 		my $filename = "$host-$db";
 		my $compat_str = ( $compat ne "" ? " --no-tablespaces" : " --routines" );
 		my $dump_cmd = "$mysqldump -u$user -p$pass -h$host$compat_str --single-transaction --opt $db > $filename";
-		my $tar_cmd = "gzip $filename.gz";
+		my $tar_cmd = "gzip $filename";
     #my $rm_cmd = "rm $filename.sql";
 
 		print "Backing up $db from $host\n";
