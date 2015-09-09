@@ -106,16 +106,16 @@ sub dump_databases
 
 	foreach my $db (@{$db_list})
 	{
-		my $filename = "$host-$db-$timestamp";
+		my $filename = "$host-$db";
 		my $compat_str = ( $compat ne "" ? " --no-tablespaces" : " --routines" );
-		my $dump_cmd = "$mysqldump -u$user -p$pass -h$host$compat_str --single-transaction --opt $db > $filename.sql";
-		my $tar_cmd = "tar czf $filename.tar.gz $filename.sql";
-		my $rm_cmd = "rm $filename.sql";
+		my $dump_cmd = "$mysqldump -u$user -p$pass -h$host$compat_str --single-transaction --opt $db > $filename";
+		my $tar_cmd = "gzip $filename.gz";
+    #my $rm_cmd = "rm $filename.sql";
 
 		print "Backing up $db from $host\n";
 		system($dump_cmd) == 0 or die "$!";
 		system($tar_cmd) == 0 or die "$!";
-		system($rm_cmd) == 0 or die "$!";
+    #system($rm_cmd) == 0 or die "$!";
 
         #tar czf $db.$DATE.tar.gz $FILE
 	}
