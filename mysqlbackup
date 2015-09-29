@@ -69,11 +69,11 @@ sub read_passwd
 
 		if ($user =~ /^\s*#/) { next; }
 
-		print "Database Backup: ". $host ."\n";
-		print "========================================================\n\n";
+		print "Database Backup: ". $host ."\r\n";
+		print "========================================================\r\n\r\n";
 		#retrieve databases with this user's privileges
 		show_databases($user, $pass, $host, $compat);
-		print "\n\n";
+		print "\r\n\r\n";
 	}
 
 	close(PASSWD);
@@ -112,7 +112,7 @@ sub dump_databases
 		my $tar_cmd = "gzip $filename";
     #my $rm_cmd = "rm $filename.sql";
 
-		print "Backing up $db from $host\n";
+		print "- $db\r\n";
 		system($dump_cmd) == 0 or die "$!";
 		system($tar_cmd) == 0 or die "$!";
     #system($rm_cmd) == 0 or die "$!";
